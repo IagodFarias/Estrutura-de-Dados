@@ -26,7 +26,7 @@ delete [] estrutura_queue;
 
 bool  queue::isfull(){ // retira valores da fila;
 
-    return (first - last == Max_Item); // se for verdade a lista está cheia
+    return ((last + 1) % Max_Item == first); // se for verdade a lista está cheia
 
 
 }
@@ -36,35 +36,36 @@ bool queue::isempty(){  // verificar se a fila está cheia
 
 } 
 
-void queue:: insert(tipoItem Item){ // insere valores a fila
-
-if (isfull()){
-    cout << "The queue is full!" << endl;
-
+void queue::insert(tipoItem Item) { // insere valores na fila
+    if (isfull()) {
+        cout << "The queue is full!" << endl;
+    } else {
+        estrutura_queue[last] = Item;
+        last = (last + 1) % Max_Item; // incrementa last circularmente
+    }
 }
 
-else
-{
-    estrutura_queue[last] = Item;
-    last++;
+tipoItem queue::remove() { // remove valores da fila
+    if (isempty()) {
+        cout << "The queue is empty" << endl;
+        return -1; // valor de retorno de erro, ajuste conforme o tipo de dados de tipoItem
+    } else {
+        tipoItem item = estrutura_queue[first];
+        first = (first + 1) % Max_Item; // incrementa first circularmente
+        return item;
+    }
 }
 
 
-
-} 
-tipoItem queue:: remove(){
-
-if (isempty()){
-    cout << "The queue is empty" << endl;
-
+                            //imprime os valores da fila
+void queue::Print() {
+    if (isempty()) {
+        cout << "The queue is empty." << endl;
+    } else {
+        cout << "Queue contents: ";
+        for (int i = first; i < last; ++i) {
+            cout << estrutura_queue[i] << " ";
+        }
+        cout << endl;
+    }
 }
-else 
-{
-    return (first ++);
-}
-
-} 
-
-//void queue::Print(){ // verificar se a fila está vazia
-
-//} // imprime os valores da fila

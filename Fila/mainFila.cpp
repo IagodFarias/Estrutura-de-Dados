@@ -26,10 +26,12 @@ if (opcao == 1)
     cout << "Qual o item: ";
     cin >> item;
     fila.insert(item);
+    fila.Print();
 }
 else if(opcao == 2)
 {
     item = fila.remove();
+    fila.Print();
 } 
 }
 while(opcao != 0);
