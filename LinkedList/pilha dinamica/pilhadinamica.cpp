@@ -49,7 +49,16 @@ TipoItem pilhadinamica::pop(){
 
  // retorna valores da pilha
 
+ if (isempty()){
+    cout << "The stack is empty"<< endl;
+ }
 
+ else {
+     node *temp = topo;
+     TipoItem value = topo->valor;
+     topo = topo -> proximo;
+     return value;
+ }
 
 
 
@@ -58,8 +67,28 @@ TipoItem pilhadinamica::pop(){
 }
 void pilhadinamica:: push(TipoItem Item){
 
+if (isfull()){
+    cout << "The stack is full" << endl;
+    throw overflow_error("cannot push from a full stack");
+}
+else {
+    node* novo = new node;  // Corrigindo para alocar memória dinamicamente
+    novo->valor = Item;
+    novo->proximo = topo;
+    topo = novo;
+
+
+}
+
+
+
 }
 void pilhadinamica:: Print(){
+
+node* temp = topo; // Usar uma variável temporária para iterar sobre a pilha
+while (temp != nullptr) {
+cout << temp->valor << endl;
+temp = temp->proximo;
 
 }
 
